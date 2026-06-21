@@ -1,0 +1,102 @@
+---
+title: blog
+permalink: /blog/
+---
+
+<html>
+<head>
+    <title>arebla</title>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
+    <!--    <meta name='description' content=''>
+    <meta name="keywords" content="
+    {% if page.keyword %}
+        {{ page.keyword | strip }}
+    {% else %}
+        {% assign all_keywords = "" %}
+        {% for post in site.posts %}
+            {% assign keywords = post.keywords | split: "," %}
+            {% for keyword in keywords %}
+                {% assign keyword = keyword | strip %}
+                {% unless all_keywords contains keyword or keyword == "" %}
+                    {% assign all_keywords = all_keywords | append: ", " | append: keyword %}
+                {% endunless %}
+            {% endfor %}
+        {% endfor %}
+        {{ all_keywords | remove_first: ", " }}
+    {% endif %}
+     -->
+    <meta name='author' content='arebla'>
+
+    <!-- <link rel='shortcut icon' href='/favicon.jpg?v=e' /> -->
+    <link href="{{ "/assets/css/blog.css" | prepend: site.baseurl }}" rel='stylesheet'/>
+    <!-- <link href='/css/blog.css' rel='stylesheet'/> -->
+
+
+    {% include mathjax.html %}
+</head>
+<body>
+    {% include nav.html %}
+    <div id='blog' class='wrap'>
+        <div id='intro'>
+            <div class='quote'>
+                <p>"A computer can never be held accountable, therefore a computer must never make a management decision."</p>
+                <a target='_blank'>— IBM Training Manual, 1979</a>
+            </div>
+            <div class='quote'>
+                <p>"I just wondered how things were put together. [...] Mainly because I wanted to know myself."</p>
+                <a target='_blank'>— Claude Shannon, <em>A Mind at Play</em></a>
+            </div>
+        </div>
+        <div id="filters">
+            <div class="keyword-container">
+                {% assign all_keywords = "" %}
+                {% for post in site.posts %}
+                    {% assign all_keywords = all_keywords | append: "," | append: post.keywords %}
+                {% endfor %}
+                {% assign unique_keywords = all_keywords | split: "," | uniq | sort %}
+                {% for keyword in unique_keywords %}
+                    {% if keyword != "" %}
+                        <a href="/blog/keywords/{{ keyword | slugify }}" class="keyword">{{ keyword }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% if page.keyword %}
+                <h2>{{ page.keyword }}</h2>
+            {% endif %}
+        </div>
+
+        <div id='posts' class='section'>
+            {% for post in site.posts %}
+                {% if page.keyword == null or post.keywords contains page.keyword %}
+                    <div class='post-row'>
+                        <p class='post-title'>
+                            <a href="{{ post.url }}">
+                                {% katexmm %}
+                                {{ post.title }}
+                                {% endkatexmm %}
+                            </a>
+                        </p>
+                        {% if post.date %}
+                          {% assign m = post.date | date: "%-m" | minus: 1 %}
+                          {% assign months = "xaneiro|febreiro|marzo|abril|maio|xuño|xullo|agosto|setembro|outubro|novembro|decembro" | split: "|" %}
+                          <p class='post-date'>
+                          {{ post.date | date: "%d" }} de {{ months[m] }} de {{ post.date | date: "%Y" }}
+                          </p>
+                        {% endif %}
+                       <!-- <p class='post-date'>
+                            {{ post.date | date_to_long_string }}
+                       </p> -->
+                    </div>
+                    <p class='post-subtitle'>
+                        {% katexmm %}
+                        {{ post.subtitle }}
+                        {% endkatexmm %}
+                    </p>
+                    <span class='hidden'>{{ forloop.index }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,10 +1,11 @@
 html {
-  font-family: -apple-system, Helvetica, arial, sans-serif;
-  color: rgba(0, 0, 0, 0.8);
-  line-height: 1.5em;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+    font-family: system-ui, sans-serif;
+    background: #fffdf8;
+    color: #2d2926;
+    line-height: 1.5em;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 body {
   margin: 0;
@@ -15,16 +16,16 @@ body .content {
 a {
   color: rgba(0, 0, 0, 0.8);
 }
-a:hover {
+/* a:hover {
   text-decoration: none;
-}
+}*/
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: -apple-system, Helvetica, arial, sans-serif;
+    font-family: system-ui, sans-serif;
 }
 h1 {
   line-height: 1.2em;
@@ -50,11 +51,11 @@ h1 {
   color: rgba(0, 0, 0, 0.6);
   text-decoration: none;
   border-bottom: none;
-  font-size: 12px;
+  font-size: 15px;
 }
-.nav a:hover {
+/*.nav a:hover {
   font-weight: bold;
-}
+}*/
 .nav ul {
   list-style-type: none;
   padding: 0;
@@ -64,21 +65,35 @@ h1 {
   margin-right: 10px;
 }
 .front-matter {
-  padding: 20px 0;
+  padding: 20px 0 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 0 auto;    /* Center horizontally */
 }
-.front-matter h4 {
-  font-family: -apple-system, Helvetica, arial, sans-serif;
+.front-matter h1 { /* Title */
+ text-align: center;
+ margin-bottom: 40px;
+}
+.front-matter .subtitle {
+  font-family: system-ui, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  margin: 0;
+  max-width: 85%;
+}
+.front-matter .bylines {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 .front-matter .bylines .byline {
-  margin-right: 20px;
-  float: left;
+  float: right;
 }
 .front-matter .bylines .byline h3,
 .front-matter .bylines .byline p {
+  font-family: system-ui, sans-serif;
   margin: 0;
-  font-family: -apple-system, Helvetica, arial, sans-serif;
 }
 .front-matter .bylines .byline h3 {
   font-size: 9px;
@@ -90,15 +105,19 @@ h1 {
   line-height: 1.6em;
 }
 .article {
-  font-size: 15px;
+  font-size: 17px;
+  font-family: "XCharter", Charter, "Bitstream Charter", "EB Garamond", "Sitka Text", Cambria, Georgia, serif;
   line-height: 1.6em;
   color: rgba(0, 0, 0, 0.8);
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 50px;
+}
+.article .katex {
+  font-size: 1.1em !important;
 }
 .article blockquote {
   margin: 0;
-  padding: 0 1em;
+  padding-left: 1em;
   color: #777;
   border-left: 0.25em solid #ddd;
 }
@@ -109,6 +128,7 @@ h1 {
   padding-top: 1em;
 }
 .article .figure {
+  font-family: system-ui, sans-serif;
   border-top: 1px solid hsla(0, 0%, 0%, 0.2);
   border-bottom: 1px solid hsla(0, 0%, 0%, 0.2);
   padding: 20px 0;
@@ -117,7 +137,7 @@ h1 {
   padding-top: 15px;
   display: inline-block;
   font-size: 13px;
-  line-heigh: 1.2em;
+  line-height: 1.2em;
 }
 .article .figure .caption-label {
   font-weight: bold;
@@ -149,21 +169,33 @@ h1 {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.5);
 }
+#bibliography h2 {
+  margin: 30px 0 -15px;
+}
 #blog {
-  margin-top: 80px;
+  margin-top: 50px;
   margin-bottom: 100px;
 }
 #blog #intro {
   font-size: 14px;
-  font-style: italic;
   line-height: 1.4em;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 #blog .quote {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 #blog .quote p {
   margin-bottom: 5px;
+  text-align: justify;
+  max-width: 600px;
+  letter-spacing: -0.01em; /* Avoid rivers of white*/
+  text-indent: -0.38em;  /* Hanging punctuaiton: Retracts the next line */
+}
+#blog #filters {
+  margin-bottom: 20px;
 }
 #blog .post-date {
   text-transform: uppercase;
@@ -188,7 +220,7 @@ h1 {
 #blog .post-subtitle {
   font-size: 14px;
   margin-top: 0;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   line-height: 1.5em;
 }
 #blog .year {

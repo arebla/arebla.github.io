@@ -1,16 +1,17 @@
 <html>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charter-webfont@4/charter.min.css">
 <head>
     <title>{{ page.title }}</title>
     <meta charset='UTF-8'>
     <meta content='width=device-width, initial-scale=1' name='viewport'/>
 
-    <meta name='description' content='Gregory Gundersen is a PhD candidate at Princeton.'>
+    <meta name='description' content=''>
     <meta name='keywords' content='{{ page.keywords }}'>
-    <meta name='author' content='Gregory Gundersen'>
+    <meta name='author' content='Andrea Real'>
 
-    <link href='/css/blog.css' rel='stylesheet'/>
-    <link href='/css/trac.css' rel='stylesheet'/>
-    <link href='/css/markdown.css' rel='stylesheet'/>
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/blog.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/trac.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/markdown.css">
 
     {% include mathjax.html %}
 </head>
@@ -20,11 +21,20 @@
     <div class='front-matter'>
         <div class='wrap'>
             <h1>{{ page.title }}</h1>
-            <h4>{{ page.subtitle }}</h4>
             <div class='bylines'>
+                <p class="subtitle">{{ page.subtitle }}</p>
                 <div class='byline'>
-                    <h3>Published</h3>
-                    <p>{{ page.date |  date: '%d %B %Y' }}</p>
+                    {% if page.date %}
+                        {% if page.lang == 'gl' %}
+                            <h3>Publicado</h3>
+                            {% assign m = page.date | date: "%-m" | minus: 1 %}
+                            {% assign months = "xaneiro|febreiro|marzo|abril|maio|xuño|xullo|agosto|setembro|outubro|novembro|decembro" | split: "|" %}
+                            <p>{{ page.date | date: "%d" }} de {{ months[m] }} de {{ page.date | date: "%Y" }}</p>
+                        {% else %}
+                            <h3>Published</h3>
+                            <p>{{ page.date | date: "%B %d, %Y" }}</p>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
             <div class='clear'></div>
@@ -35,7 +45,16 @@
     </div>
     <div id='bibliography'>
         <div class='wrap'>
-            {% bibliography --cited %}
+            {% if page.lang == 'gl' %}
+                <h2>Referencias</h2>
+            {% else %}
+                <h2>References</h2>
+            {% endif %}
+            {% if page.scholar.bibliography %}
+                {% bibliography --cited --file {{ page.scholar.bibliography }} %}
+            {% else %}
+                {% bibliography --cited %}
+            {% endif %}
         </div>
     </div>
 </div>
