@@ -24,7 +24,15 @@
             <li>
                 <!-- <a href='/blog/'>bitácora</a> -->
                 <a href='https://www.github.com/arebla' target='_blank'>código</a></li>
-            <li id='contact'>arebla(arroba)proton.me</li>
+            <script>
+              var alcume = "albera";
+              var dominio = "em.notorp";
+              document.write('<li id="contact">' +
+                alcume.split('').reverse().join('') +
+                '&#64;' +
+                dominio.split('').reverse().join('') +
+              '</li>');
+            </script>
         </ul>
     </div>
 </body>
